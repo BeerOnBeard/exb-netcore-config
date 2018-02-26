@@ -10,7 +10,7 @@ ASP.NET Core apps use the environment variable `ASPNETCORE_ENVIRONMENT` to optio
 
 ## .NET Core Console Apps
 
-Console apps in .NET Core do not have the [Microsoft.Extensions.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration/2.0.0) and [Microsoft.Extensions.Configuration.Json](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json/2.0.0) packages referenced by default. However, they can easily be added to projects to allow these console apps to use these helpful frameworks to load JSON configuration files and use the same optional overrides as ASP.NET Core apps using an environment variable.
+Console apps in .NET Core do not reference the [Microsoft.Extensions.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration/2.0.0) and [Microsoft.Extensions.Configuration.Json](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json/2.0.0) packages by default. However, they can easily be added to projects to allow these console apps to use these helpful frameworks to load JSON configuration files and use the same optional overrides as ASP.NET Core apps using an environment variable with a little bit of extra code.
 
 Settings files are not automatically shipped with Console apps when published, like they are in ASP.NET Core apps. In order to publish settings files to the output directory, add the following to the project's `.csproj` file. It will copy any file that starts with `appsettings`, such as `appsettings.json` and `appsettings.Development.json`, to the publish directory.
 
@@ -28,7 +28,7 @@ Add references to the packages [Microsoft.Extensions.Configuration](https://www.
 
 **NOTE:** Case is important in file names and **must** match the case of the environment variable value.
 
-The following code snippet will set the base directory to the current working directory of the app. Then it will load in the `appsettings.json` file. Then, if it exists, it will load in the settings file that is specific to the environment variable. The `optional` parameter lets the system know that the file might not exists and that it's not a big deal. `.Build()` is called to generate the final `IConfiguration` instance that can be used in the application.
+The next code snippet will first set the base directory to the current working directory of the app where the settings files reside. Then, it will load in the `appsettings.json` file. Then, it will load in the settings file that is named using the environment variable, if it exists. The `optional` parameter lets the system know that the file might not exists and that it's not a big deal. `.Build()` is called to generate the final `IConfiguration` instance that can be used in the application.
 
 ```csharp
   var configuration = new ConfigurationBuilder()
@@ -38,7 +38,7 @@ The following code snippet will set the base directory to the current working di
     .Build();
 ```
 
-In order to reduce potential future collisions, a unique environment variable should be used to signify what configuration override to use. In this example, `BEERONBEARD_ENVIRONMENT` is used. The value of `Development` will be set by the examples in this project.
+In order to reduce potential collisions, a unique environment variable should be used to signify what configuration override to use. In this example, `BEERONBEARD_ENVIRONMENT` is used. The value of `Development` will be set by the examples in this project.
 
 ## Running the Examples
 
