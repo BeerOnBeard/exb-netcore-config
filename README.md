@@ -1,5 +1,7 @@
 # Example of .NET Core Configuration Loading in ASP.NET and Console Apps
 
+Check out [my corresponding blog post on the subject at AssortedSolutions](https://blog.assortedsolutions.com/2018/02/25/NET-Core-Configuration-Loading-in-ASP-NET-and-Console-Apps/).
+
 [Microsoft.Extensions.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration/2.0.0) and [Microsoft.Extensions.Configuration.Json](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json/2.0.0) provide an easy way to load JSON configuration files into .NET Core applications. ASP.NET Core apps have these packages included by default and have some helpful paradigms that can be reused in Console apps. The projects in this repository showcase how to use environment variables to load configuration overrides in both types of applications.
 
 The examples include the ability to build and run in both a VSCode environment and a Docker environment. See the section `Running the Examples` for more information.
